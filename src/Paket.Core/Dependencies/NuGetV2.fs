@@ -90,6 +90,8 @@ let tryGetAllVersionsFromNugetODataFindByIdNewestFirst (auth, nugetURL, package:
 let tryGetPackageVersionsViaJson (auth, nugetURL, package:PackageName) =
     async {
         let url = sprintf "%s/package-versions/%O?semVerLevel=2.0.0&includePrerelease=true" nugetURL package
+        if verbose then
+            verbosefn "tryGetPackageVersionsViaJson from url '%s'" url
         let! raw = safeGetFromUrl (auth, url, acceptJson)
 
         match raw with
